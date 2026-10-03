@@ -1,0 +1,25 @@
+import { launchBrowser } from './_browser.mjs';
+import path from 'path';
+const url = 'file:///' + path.resolve('dist/index.html').split(path.sep).join('/');
+const browser = await launchBrowser();
+const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+const p = await ctx.newPage();
+await p.goto(url); await p.waitForTimeout(600);
+await p.getByRole('button', { name: 'Start Studying' }).first().click(); await p.waitForTimeout(500);
+await p.locator('button.tile:not([disabled])').first().click(); await p.waitForTimeout(900);
+if (!(await p.getByRole('button', { name: 'Pen (2)' }).count())) { await p.keyboard.press('i'); await p.waitForTimeout(500); }
+await p.getByRole('button', { name: 'Pen (2)' }).click();
+await p.waitForTimeout(400); const box = await p.locator('article .tile').first().boundingBox();
+await p.mouse.move(box.x + 30, box.y + 30); await p.mouse.down();
+for (let i = 0; i < 40; i++) await p.mouse.move(box.x + 30 + i * 8, box.y + 30 + Math.sin(i / 4) * 15);
+await p.mouse.up();
+await p.waitForTimeout(800);
+const before = await p.locator('article svg[viewBox^="0 0 1000"] path').count();
+await p.keyboard.press('Control+z'); await p.waitForTimeout(200);
+const afterUndo = await p.locator('article svg[viewBox^="0 0 1000"] path').count();
+await p.keyboard.press('Control+y'); await p.waitForTimeout(600);
+await p.reload(); await p.waitForTimeout(1500);
+await p.getByRole('button', { name: /Continue where you left off/ }).click(); await p.waitForTimeout(1200);
+const afterReload = await p.locator('article svg[viewBox^="0 0 1000"] path').count();
+console.log({ before, afterUndo, afterReload });
+await browser.close();

@@ -1,0 +1,23 @@
+{
+  "code": "DEMO 101",
+  "name": "Simple Machines",
+  "institution": "Demo University",
+  "examLabel": "Final exam",
+  "papers": ["2022", "2023"],
+  "creator": { "name": "", "tag": "" },
+  "relayUrl": "",
+  "teachers": [
+    {
+      "id": "demo",
+      "name": "Dr. Demo Teacher",
+      "short": "Demo Sir",
+      "section": "",
+      "keyPrefix": "a",
+      "filePrefix": "l",
+      "lectures": [
+        { "n": 1, "title": "Gears & Levers" },
+        { "n": 2, "title": "Your next lecture goes here" }
+      ]
+    }
+  ]
+}

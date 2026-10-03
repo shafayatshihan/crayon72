@@ -1,0 +1,10 @@
+{
+  "name": "crayon72",
+  "description": "Build a Crayon 72 exam-study web app (one offline HTML file) from teacher slide PDFs and past-year exam questions.",
+  "version": "1.0.0",
+  "author": { "name": "Shafayat Islam Shihan", "url": "https://github.com/shafayatshihan" },
+  "homepage": "https://github.com/shafayatshihan/crayon72",
+  "repository": "https://github.com/shafayatshihan/crayon72",
+  "license": "MIT",
+  "keywords": ["education", "exam-prep", "study-app", "slides", "react", "threejs", "skill"]
+}

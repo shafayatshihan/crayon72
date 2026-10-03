@@ -1,0 +1,12 @@
+{
+  "name": "crayon72",
+  "owner": { "name": "Shafayat Islam Shihan", "url": "https://github.com/shafayatshihan" },
+  "description": "Crayon 72: turn teacher slides and past exam papers into one offline, interactive exam-study HTML app.",
+  "plugins": [
+    {
+      "name": "crayon72",
+      "source": "./plugins/crayon72",
+      "description": "Build a Crayon 72 exam-study web app (single offline HTML: answers, hand-drawn figures, 3D animations, slides, videos, ink) from lecture-slide PDFs and past-year questions."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+import { launchBrowser } from './_browser.mjs';
+import path from 'path';
+const url = 'file:///' + path.resolve('dist/index.html').split(path.sep).join('/');
+const browser = await launchBrowser();
+const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+const p = await ctx.newPage();
+const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
+await p.goto(url); await p.waitForTimeout(1300);
+await p.getByRole('button', { name: 'Start Studying' }).first().click(); await p.waitForTimeout(600);
+await p.locator('button.tile:not([disabled])').first().click(); await p.waitForTimeout(800);
+await p.getByRole('button', { name: 'Videos' }).click(); await p.waitForTimeout(800);
+const poster = p.locator('aside button').filter({ hasText: /Tap to play|Offline file/ }).first();
+await poster.click(); await p.waitForTimeout(300); await poster.click(); await p.waitForTimeout(1500); await poster.click(); await p.waitForTimeout(1500); await p.locator('aside .scroll-y button').nth(1).click(); await p.waitForTimeout(1800);
+console.log('pages open:', ctx.pages().length, ctx.pages().map((x) => x.url().slice(0, 60)));
+await p.mouse.move(600, 400); await p.waitForTimeout(200);
+await p.screenshot({ path: 'raw/shots/cursor.png', clip: { x: 500, y: 300, width: 300, height: 200 } });
+console.log(errs.join('\n') || 'no errors');
+await browser.close();
